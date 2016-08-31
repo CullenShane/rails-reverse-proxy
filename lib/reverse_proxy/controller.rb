@@ -22,6 +22,11 @@ module ReverseProxy
           set_cookies.each do |key, attributes|
             cookies[key] = attributes
           end
+          Rails.logger.tagged "cookie_set" do
+            Rails.logger.info "code: #{code}"
+            Rails.logger.info "response: #{response.inspect}"
+            Rails.logger.info "cookies: #{set_cookies.inspect}"
+          end
         end
 
         config.on_redirect do |code, response, redirect_url|
